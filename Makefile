@@ -44,22 +44,25 @@ format :; forge fmt
 anvil :; anvil -m 'test test test test test test test test test test test junk' --steps-tracing --block-time 1
 
 # spin up fork
-fork :; @anvil --fork-url ${RPC_ETH_MAIN} --fork-block-number 19799039 --fork-chain-id 1 --chain-id 123
+fork :; @anvil --fork-url ${RPC_BASE_MAIN} --fork-block-number 13383370 --fork-chain-id 8453 --chain-id 123
 
 # deployment
 deploy-local: 
 	@forge script script/deployment/DeployNFTContract.s.sol:DeployNFTContract --rpc-url localhost --private-key ${DEFAULT_ANVIL_KEY} --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --broadcast 
 
+deploy-token-testnet: 
+	@forge script script/deployment/DeployERC20Token.s.sol:DeployERC20Token --rpc-url $(RPC_BASE_SEPOLIA) --account Test-Deployer --sender 0x11F392Ba82C7d63bFdb313Ca63372F6De21aB448 --broadcast --verify --etherscan-api-key $(BASESCAN_KEY) -vvvv
+
 deploy-testnet: 
-	@forge script script/deployment/DeployNFTContract.s.sol:DeployNFTContract --rpc-url $(RPC_ETH_SEPOLIA) --account <account name> --sender <KeystoreName> --broadcast --verify --etherscan-api-key sepoliascan
+	@forge script script/deployment/DeployNFTContract.s.sol:DeployNFTContract --rpc-url $(RPC_BASE_SEPOLIA) --account Test-Deployer --sender 0x11F392Ba82C7d63bFdb313Ca63372F6De21aB448 --broadcast --verify --etherscan-api-key $(BASESCAN_KEY) -vvvv
 
 deploy-mainnet: 
-	@forge script script/deployment/DeployNFTContract.s.sol:DeployNFTContract --rpc-url $(RPC_ETH_MAIN) --account <account name> --sender <KeystoreName> --broadcast --verify --etherscan-api-key etherscan
+	@forge script script/deployment/DeployNFTContract.s.sol:DeployNFTContract --rpc-url $(RPC_BASE_MAIN) --account EARN-Deployer --sender 0x4397122Ad9602aD358816F1f2De2396e3dCEb857 --broadcast --verify --verify --etherscan-api-key $(BASESCAN_KEY) -vvvv
 
 
 # interaction
 mint-testnet:
-	@forge script script/interactions/Interactions.s.sol:MintNft --rpc-url $(RPC_ETH_SEPOLIA) --account <account name> --sender <KeystoreName> --broadcast
+	@forge script script/interactions/Interactions.s.sol:MintNft --rpc-url $(RPC_BASE_SEPOLIA) --account Test-Deployer --sender 0x11F392Ba82C7d63bFdb313Ca63372F6De21aB448 --broadcast --etherscan-api-key $(BASESCAN_KEY)
 
 
 # security

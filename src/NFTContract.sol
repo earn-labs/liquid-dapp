@@ -19,11 +19,14 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
         string name;
         string symbol;
         address owner;
+        uint256 tokenFee;
+        uint256 ethFee;
         address feeAddress;
         address tokenAddress;
         string baseURI;
         string contractURI;
         uint256 maxSupply;
+        uint96 royaltyNumerator;
     }
 
     /**
@@ -33,8 +36,8 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
     IERC20 private immutable i_paymentToken;
 
     address private s_feeAddress;
-    uint256 private s_tokenFee = 400 ether;
-    uint256 private s_ethFee = 0.1 ether;
+    uint256 private s_tokenFee;
+    uint256 private s_ethFee;
     uint256 private s_batchLimit = 50;
 
     string private s_baseURI;
@@ -80,11 +83,14 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
     ///                     name: collection name
     ///                     symbol: nft symbol
     ///                     owner: contract owner
+    ///                     tokenFee: minting fee in tokens
+    ///                     ethFee: minting fee in native coin
     ///                     feeAddress: address for fees
     ///                     tokenAddress: ERC20 token address
     ///                     baseURI: base uri
     ///                     contractURI: contract uri
     ///                     maxSupply: maximum nfts mintable
+    ///                     royaltyNumerator: basis points for royalty fees
     constructor(
         ConstructorArguments memory args
     ) ERC721A(args.name, args.symbol) Ownable(msg.sender) {
@@ -93,6 +99,8 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
         }
         if (bytes(args.baseURI).length == 0) revert NFTContract_NoBaseURI();
 
+        s_tokenFee = args.tokenFee;
+        s_ethFee = args.ethFee;
         s_feeAddress = args.feeAddress;
         i_paymentToken = IERC20(args.tokenAddress);
         i_maxSupply = args.maxSupply;
@@ -100,6 +108,7 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
 
         _setBaseURI(args.baseURI);
         _setContractURI(args.contractURI);
+        _setDefaultRoyalty(args.feeAddress, args.royaltyNumerator);
         _transferOwnership(args.owner);
     }
 
@@ -197,13 +206,13 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
         if (!success) revert NFTContract_EthTransferFailed();
     }
 
-    /// @notice Sets base Uri
+    /// @notice Sets base Uri (only owner)
     /// @param baseURI base uri
     function setBaseURI(string memory baseURI) external onlyOwner {
         _setBaseURI(baseURI);
     }
 
-    /// @notice Sets royalty
+    /// @notice Sets royalty (only owner)
     /// @param feeAddress address receiving royalties
     /// @param royaltyNumerator numerator to calculate fees (denominator is 10000)
     function setRoyalty(
@@ -214,7 +223,7 @@ contract NFTContract is ERC721A, ERC2981, ERC721ABurnable, Ownable {
         emit RoyaltyUpdated(feeAddress, royaltyNumerator);
     }
 
-    /// @notice Pauses minting
+    /// @notice Pauses minting (only owner)
     /// @param _isPaused boolean to set minting to be paused (true) or unpaused (false)
     function pause(bool _isPaused) external onlyOwner {
         s_paused = _isPaused;

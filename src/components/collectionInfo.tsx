@@ -96,7 +96,7 @@ export default function CollectionInfo() {
                     textSize='text-base'
                     iconSize='text-[10px]'
                 />
-                <Link className="opacity-80 hover:opacity-100 my-auto w-fit" href={`https://${isTestnet() ? "baseSepolia." : ""}etherscan.io/token/${NFT_CONTRACT}`} target="_blank">
+                <Link className="opacity-80 hover:opacity-100 my-auto w-fit" href={`https://${isTestnet() ? "sepolia." : ""}basescan.org/address/${NFT_CONTRACT}`} target="_blank">
                     <Image
                         src="/basescan.svg"
                         width={122}

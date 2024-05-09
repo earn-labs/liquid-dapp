@@ -49,6 +49,7 @@ export default function Nfts() {
         config
     };
 
+
     // read nft balance
     const {
         data: nftBalance,

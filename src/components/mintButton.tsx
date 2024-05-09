@@ -27,13 +27,15 @@ const nftContract = {
     config
 };
 
-async function hasTokensApproved(account: `0x${string}` | undefined): Promise<[boolean, boolean, bigint]> {
+async function hasTokensApproved(account: `0x${string}` | undefined, quantity: number): Promise<[boolean, boolean, bigint]> {
 
     // read token fee
     const tokenFee = await readContract(config, {
         ...nftContract,
         functionName: "getTokenFee",
     });
+
+    const totalTokenFee = tokenFee * BigInt(quantity);
 
     // read allowance
     const balance = await readContract(config, {
@@ -42,7 +44,7 @@ async function hasTokensApproved(account: `0x${string}` | undefined): Promise<[b
         args: [account as `0x${string}`]
     });
 
-    const sufficientBalance = balance >= tokenFee;
+    const sufficientBalance = balance >= totalTokenFee;
 
     // read allowance
     const allowance = await readContract(config, {
@@ -51,9 +53,9 @@ async function hasTokensApproved(account: `0x${string}` | undefined): Promise<[b
         args: [account as `0x${string}`, NFT_CONTRACT]
     });
 
-    const approved = allowance >= tokenFee;
+    const approved = allowance >= totalTokenFee;
 
-    return [sufficientBalance, approved, tokenFee];
+    return [sufficientBalance, approved, totalTokenFee];
 }
 
 
@@ -132,10 +134,10 @@ export default function MintButton({ paused }: Props) {
     // on button click
     async function onSubmit() {
 
-        const [sufficientBalance, approved, tokenFee] = await hasTokensApproved(address);
+        const [sufficientBalance, approved, fee] = await hasTokensApproved(address, quantity);
 
         if (!sufficientBalance) {
-            setErrorMessage("You have insufficient token balance. You need 1M 0X52 tokens to mint an NFT.");
+            setErrorMessage(`You have insufficient token balance. You need ${fee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} to mint ${quantity} NFT.`);
             setShowError(true);
             return;
         };
@@ -150,7 +152,7 @@ export default function MintButton({ paused }: Props) {
         }
         else {
             setIsApproving(true);
-            approve(tokenFee);
+            approve(fee);
         }
     }
 
@@ -217,11 +219,14 @@ export default function MintButton({ paused }: Props) {
             });
 
             if (fee !== undefined) {
-                setTokenFee(Number(formatEther(fee)));
+                setTokenFee(Number(formatEther(fee)) * quantity);
             }
         }
-        getTokenFee();
-    }, [])
+        if (quantity !== undefined) {
+            getTokenFee();
+        }
+
+    }, [quantity])
 
     // close pop up
     function closeModal() {
@@ -234,7 +239,7 @@ export default function MintButton({ paused }: Props) {
     // style of minting button
     function getButtonStyle() {
         if (!paused) {
-            return "text-black hover:bg-primary ease-in-out duration-500";
+            return "text-black hover:bg-primary hover:text-textColor ease-in-out duration-500";
         }
         else {
             return "text-primary"
@@ -243,16 +248,32 @@ export default function MintButton({ paused }: Props) {
 
     return (
         <>
-            <div className="flex items-center justify-center">
-                {!isConnected && <ConnectKitButton />}
-                {isConnected && <button
-                    type="button"
-                    disabled={mintPending || approvePending || paused}
-                    onClick={onSubmit}
-                    className={"rounded-md bg-secondary px-4 py-2 text-sm font-medium " + getButtonStyle()}
-                >
-                    MINT
-                </button>}
+            <div className="flex flex-row justify-center w-full ">
+                <div className='flex flex-row w-fit mx-auto gap-4'>
+                    <input
+                        className="ml-auto rounded bg-secondary/20 py-1 px-2 text-left text-textColor h-10 w-24 placeholder:italic placeholder:text-slate-400 placeholder-shown:border-gray-500 border-gray-500 border-2"
+                        type="number"
+                        value={quantity >= 1 ? String(quantity) : ""}
+                        max="50"
+                        min="1"
+                        placeholder="# NFTs"
+                        onChange={(e) => {
+                            setQuantity(Number(e.target.value));
+                        }}
+                        disabled={mintPending || approvePending || paused}
+                    />
+
+                    {!isConnected && <ConnectKitButton />}
+                    {isConnected && <button
+                        type="button"
+                        disabled={mintPending || approvePending || paused}
+                        onClick={onSubmit}
+                        className={"rounded-md bg-secondary px-4 py-2 text-sm font-medium h-10 mr-auto" + getButtonStyle()}
+                    >
+                        MINT
+                    </button>}
+                </div>
+
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -291,10 +312,10 @@ export default function MintButton({ paused }: Props) {
                                             {showError && <div>Error</div>}
                                         </Dialog.Title>
                                         <div className="mt-2 text-xs sm:text-sm text-white">
-                                            {isApproving && approvePending && <p>{`Approve ${tokenFee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} in your wallet to mint 1 NFT.`}</p>}
+                                            {isApproving && approvePending && <p>{`Approve ${tokenFee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} in your wallet to mint ${quantity} NFT(s).`}</p>}
                                             {isApproving && isConfirmingApprove && <p>{`Approving ${tokenFee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL}...`}</p>}
                                             {isMinting && mintPending && <div><p>Confirm transaction in your wallet.</p></div>}
-                                            {isMinting && isConfirmingMint && <p>Minting your NFT...</p>}
+                                            {isMinting && isConfirmingMint && <p>Minting your NFT(s)...</p>}
                                             {isMinting && isConfirmedMint && <div><p >Mint Successful!</p></div>}
                                             {showError && <p className='text-primary'>{errorMessage}</p>}
 

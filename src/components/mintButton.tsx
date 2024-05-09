@@ -263,7 +263,6 @@ export default function MintButton({ paused }: Props) {
                         disabled={mintPending || approvePending || paused}
                     />}
 
-
                     {!paused && isConnected && <button
                         type="button"
                         disabled={mintPending || approvePending || paused}

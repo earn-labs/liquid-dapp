@@ -250,7 +250,7 @@ export default function MintButton({ paused }: Props) {
         <>
             <div className="flex flex-row justify-center w-full ">
                 <div className='flex flex-row w-fit mx-auto gap-4'>
-                    <input
+                    {isConnected && <input
                         className="ml-auto rounded bg-secondary/20 py-1 px-2 text-left text-textColor h-10 w-24 placeholder:italic placeholder:text-secondary/50 placeholder-shown:border-secondary/50 border-secondary/50 border-2"
                         type="number"
                         value={quantity >= 1 ? String(quantity) : ""}
@@ -261,7 +261,7 @@ export default function MintButton({ paused }: Props) {
                             setQuantity(Number(e.target.value));
                         }}
                         disabled={mintPending || approvePending || paused}
-                    />
+                    />}
 
                     {!isConnected && <ConnectKitButton />}
                     {isConnected && <button

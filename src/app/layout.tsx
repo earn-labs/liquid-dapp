@@ -14,18 +14,18 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "example.com",
     creator: "@buyholdearn",
-    images: "https://example.com/featured_image.jpg",
+    images: "https://liquid.buyholdearn.com/preview.jpg",
   },
   openGraph: {
     type: "website",
-    url: "https://example.com",
+    url: "https://liquid.buyholdearn.com",
     title: process.env.NEXT_PUBLIC_PROJECT_NAME,
     description:
       process.env.NEXT_PUBLIC_PROJECT_DESCRIPTION,
     siteName: process.env.NEXT_PUBLIC_PROJECT_NAME,
     images: [
       {
-        url: "https://example.com/featured_image.jpg",
+        url: "https://liquid.buyholdearn.com/preview.jpg",
       },
     ],
   },

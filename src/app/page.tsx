@@ -10,8 +10,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex lg:h-screen min-h-screen flex-col bg-bgColor justify-stretch">
-      <div className="mx-auto w-full flex flex-col lg:w-7/8 2xl:w-3/4 h-full mt-8 px-8 sm:px-12 items-stretch">
+    <main className="flex min-h-screen flex-col bg-bgColor justify-stretch">
+      <div className="mx-auto w-full flex flex-col lg:w-7/8 2xl:w-3/4 h-full mt-8 px-8 sm:px-12 items-stretch flex-flexMain">
         <Navbar></Navbar>
 
         <div>
@@ -29,14 +29,10 @@ export default function Home() {
         <div>
 
         </div>
-        <div className="w-full gap-2 md:gap-12 flex flex-row flex-wrap-reverse lg:flex-nowrap justify-between h-full ">
-          <div className="h-full flex flex-col w-full justify-end">
-            <CollectionInfo></CollectionInfo>
-          </div>
-          <div className="h-full flex flex-col w-full justify-end">
-            <MintInfo></MintInfo>
-          </div>
-          <div className="h-full flex flex-col w-full justify-end order-first lg:order-none">
+        <div className="w-full gap-2 md:gap-12 2xl:gap-20 flex flex-row flex-wrap-reverse lg:flex-nowrap justify-between h-full ">
+          <CollectionInfo></CollectionInfo>
+          <MintInfo></MintInfo>
+          <div className="flex flex-col w-full justify-end order-first lg:order-none">
             <Nfts></Nfts>
             <AccountInfo></AccountInfo>
           </div>

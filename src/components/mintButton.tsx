@@ -5,7 +5,7 @@ import { MoonLoader } from 'react-spinners';
 import { Fragment, useEffect, useState } from 'react'
 import { formatEther } from 'viem';
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { getBalance, readContract, switchChain } from 'wagmi/actions';
+import { getBalance, getToken, readContract, switchChain } from 'wagmi/actions';
 import Image from 'next/image';
 import { ConnectKitButton } from 'connectkit';
 import { nftABI } from '@/assets/nftABI';
@@ -56,6 +56,8 @@ async function hasTokensApproved(account: `0x${string}` | undefined): Promise<[b
     return [sufficientBalance, approved, tokenFee];
 }
 
+
+
 type Props = {
     paused: boolean;
 };
@@ -68,6 +70,7 @@ export default function MintButton({ paused }: Props) {
     let [isMinting, setIsMinting] = useState<boolean>(false);
     let [mintCompleted, setMintCompleted] = useState<boolean>(false);
     let [quantity, setQuantity] = useState<number>(1);
+    let [tokenFee, setTokenFee] = useState<number>(1);
     let [showError, setShowError] = useState<boolean>(false);
     let [errorMessage, setErrorMessage] = useState<string>("An Error occured.");
 
@@ -128,22 +131,6 @@ export default function MintButton({ paused }: Props) {
 
     // on button click
     async function onSubmit() {
-
-        // if (chainId != (isTestnet() ? baseSepolia.id : base.id)) {
-        //     setErrorMessage("The NFTs are minted on Ethereum. Switch to Ethereum and try again.");
-        //     setShowError(true);
-        //     try {
-        //         if (isTestnet())
-        //             await switchChain(config, { chainId: baseSepolia.id });
-        //         else
-        //             await switchChain(config, { chainId: base.id });
-        //     }
-        //     catch {
-        //         console.log('Switching chains failed.')
-        //         setShowError(false);
-        //     }
-        //     return;
-        // }
 
         const [sufficientBalance, approved, tokenFee] = await hasTokensApproved(address);
 
@@ -220,6 +207,22 @@ export default function MintButton({ paused }: Props) {
         }
     }, [mintError])
 
+
+    useEffect(() => {
+        async function getTokenFee() {
+            // read token fee
+            const fee = await readContract(config, {
+                ...nftContract,
+                functionName: "getTokenFee",
+            });
+
+            if (fee !== undefined) {
+                setTokenFee(Number(formatEther(fee)));
+            }
+        }
+        getTokenFee();
+    }, [])
+
     // close pop up
     function closeModal() {
         setShowError(false);
@@ -288,11 +291,11 @@ export default function MintButton({ paused }: Props) {
                                             {showError && <div>Error</div>}
                                         </Dialog.Title>
                                         <div className="mt-2 text-xs sm:text-sm text-white">
-                                            {isApproving && approvePending && <p>Approve 1 Million 0X52 tokens in your wallet to mint 1 NFT.</p>}
-                                            {isApproving && isConfirmingApprove && <p>Approving 1 Million 0X52...</p>}
-                                            {isMinting && mintPending && <div><p>Confirm transaction in your wallet.</p><p>A 0.2 ETH minting fee and transaction fees will be applied.</p></div>}
+                                            {isApproving && approvePending && <p>{`Approve ${tokenFee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} in your wallet to mint 1 NFT.`}</p>}
+                                            {isApproving && isConfirmingApprove && <p>{`Approving ${tokenFee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL}...`}</p>}
+                                            {isMinting && mintPending && <div><p>Confirm transaction in your wallet.</p></div>}
                                             {isMinting && isConfirmingMint && <p>Minting your NFT...</p>}
-                                            {isMinting && isConfirmedMint && <div><p >Mint Successful!</p><p >Please be patient. It might take a few minutes until the NFT is minted and appears on Base chain.</p></div>}
+                                            {isMinting && isConfirmedMint && <div><p >Mint Successful!</p></div>}
                                             {showError && <p className='text-primary'>{errorMessage}</p>}
 
                                         </div>

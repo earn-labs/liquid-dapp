@@ -29,6 +29,9 @@ const config: Config = {
         secondary: "#5CBCEF",
         button: "#fff",
       },
+      flex: {
+        flexMain: "1 0 auto",
+      },
     },
   },
   plugins: [],

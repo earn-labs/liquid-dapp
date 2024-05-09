@@ -63,29 +63,12 @@ export default function AccountInfo() {
             let text: string = "---";
             if (tokenLoading) {
                 text = "Loading...";
-            } else if (tokenSuccess && tokenBalance != null) {
-                let truncBalance: number;
-                let letter: string;
-                if (balance >= 1000000000000) {
-                    truncBalance = balance / 1000000000000;
-                    letter = "T";
-                } else if (balance >= 1000000000) {
-                    truncBalance = balance / 1000000000;
-                    letter = "B";
-                } else if (balance >= 1000000) {
-                    truncBalance = balance / 1000000;
-                    letter = "M";
-                } else if (balance >= 1000) {
-                    truncBalance = balance / 1000;
-                    letter = "K";
-                } else {
-                    truncBalance = balance;
-                    letter = "";
-                }
-                text = `${truncBalance.toLocaleString(undefined, {
+            } else if (tokenSuccess && balance != null) {
+
+                text = `${balance.toLocaleString(undefined, {
                     minimumFractionDigits: 3,
                     maximumFractionDigits: 3,
-                })}${String.fromCharCode(8239)}${letter} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL
+                })}${String.fromCharCode(8239)} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL
                     }`;
             } else {
                 text = "---";
@@ -127,7 +110,7 @@ export default function AccountInfo() {
 
 
     return (
-        <div className="h-fit mx-auto w-full rounded-md my-2 text-titleColor max-w-md ">
+        <div className="h-fit mx-auto w-full rounded-md text-titleColor max-w-md ">
 
             <h2 className="mb-4 border-b-2 border-primary pb-2 text-lg uppercase  text-textColor">
                 ACCOUNT INFO

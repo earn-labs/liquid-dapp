@@ -80,15 +80,13 @@ export default function CollectionInfo() {
 
 
     return (
-        <div className="h-fit mx-auto w-full rounded-md my-2 text-titleColor max-w-md flex flex-col justify-between">
+        <div className="h-fit mx-auto w-full rounded-md my-2 text-titleColor max-w-md flex flex-col justify-between mb-8 lg:mb-0 mt-auto">
             <div className="flex flex-row gap-5 align-middle justify-start">
                 <h2 className="mb-4 border-b-2 border-primary pb-2 text-lg uppercase text-textColor">
                     {COLLECTION_NAME}
                 </h2>
 
             </div>
-
-
             <div className='gap-2 w-full align-middle leading-4 mb-2 flex flex-row'>
                 <div className='ml-0 my-auto w-fit text-secondary opacity-60 text-base'>CA: </div>
                 <CopyToClipboard
@@ -108,42 +106,10 @@ export default function CollectionInfo() {
                     />
                 </Link>
             </div>
-
-            <div className="pb-4 text-xs text-secondary w-full">
-                <table className="w-full max-w-80 text-left">
-                    <thead className=" flex-grow">
-                        <tr className="text-base">
-                            <th>TRAITS</th>
-                            <th>RARITY</th>
-                        </tr>
-                    </thead>
-                    <tbody className="w-fit text-[0.7rem]">
-                        <tr>
-                            <td>CLUBS</td>
-                            <td>25 %</td>
-                        </tr>
-                        <tr>
-                            <td>DIAMONDS</td>
-                            <td>25 %</td>
-                        </tr>
-                        <tr>
-                            <td>HEARTS</td>
-                            <td>25 %</td>
-
-                        </tr>
-                        <tr>
-                            <td>SPADES</td>
-                            <td>25 %</td>
-                        </tr>
-                        <tr>
-                            <td>QUEENS (MUSIC NFTs)</td>
-                            <td>0.08 %</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+            <div className="min-h-24 w-full text-secondary my-4">
+                <div>Liquid NFTs contribute to EARN liquidity and provide revenue share from the EARN ecosystem to holders.</div>
             </div>
-            <div className=" text-base max-w-64">
+            <div className=" text-base">
                 <div className="grid grid-cols-2 justify-between w-full text-secondary my-4">
                     <h3 className="uppercase">Minting Fee: </h3>
                     <div>

@@ -27,7 +27,7 @@ export default function Navbar({ }: Props) {
             <div className="my-auto h-fit w-fit flex-row rounded-xl border-2 border-black bg-button font-bold text-black hover:bg-primary sm:w-44 sm:justify-between transition duration-500">
                 <a
                     className="pointer-events-auto mx-auto flex h-10 items-center align-middle text-lg uppercase sm:gap-1 sm:text-center lg:p-0 "
-                    href={`https://${isTestnet() ? "testnets." : ""}opensea.io/assets/${isTestnet() ? "base-baseSepolia" : "base"}/${process.env.NEXT_PUBLIC_NFT_CONTRACT}`}
+                    href={`https://${isTestnet() ? "testnets." : ""}opensea.io/assets/${isTestnet() ? "base-sepolia" : "base"}/${process.env.NEXT_PUBLIC_NFT_CONTRACT}`}
                     rel="noopener noreferrer"
                     target="_blank"
                 >
@@ -48,7 +48,7 @@ export default function Navbar({ }: Props) {
             <div className="my-auto h-fit w-fit flex-row rounded-xl border-2 border-black bg-button font-bold text-black hover:bg-primary sm:w-44 sm:justify-between transition duration-500">
                 <a
                     className="pointer-events-auto mx-auto flex h-10 items-center align-middle text-lg uppercase sm:gap-1 sm:text-center lg:p-0 "
-                    href={`https://app.uniswap.org/swap?outputCurrency=${process.env.NEXT_PUBLIC_TOKEN_CONTRACT}`}
+                    href={`https://app.uniswap.org/swap?chain=base&outputCurrency=${process.env.NEXT_PUBLIC_TOKEN_CONTRACT}`}
                     rel="noopener noreferrer"
                     target="_blank"
                 >

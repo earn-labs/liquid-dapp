@@ -71,7 +71,7 @@ export default function MintButton({ paused }: Props) {
     let [isApproving, setIsApproving] = useState<boolean>(false);
     let [isMinting, setIsMinting] = useState<boolean>(false);
     let [mintCompleted, setMintCompleted] = useState<boolean>(false);
-    let [quantity, setQuantity] = useState<number>(1);
+    let [quantity, setQuantity] = useState<number>(0);
     let [tokenFee, setTokenFee] = useState<number>(1);
     let [showError, setShowError] = useState<boolean>(false);
     let [errorMessage, setErrorMessage] = useState<string>("An Error occured.");
@@ -137,7 +137,7 @@ export default function MintButton({ paused }: Props) {
         const [sufficientBalance, approved, fee] = await hasTokensApproved(address, quantity);
 
         if (!sufficientBalance) {
-            setErrorMessage(`You have insufficient token balance. You need ${fee} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} to mint ${quantity} NFT.`);
+            setErrorMessage(`You have insufficient token balance. You need ${formatEther(fee)} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} to mint ${quantity} NFT.`);
             setShowError(true);
             return;
         };
@@ -251,7 +251,7 @@ export default function MintButton({ paused }: Props) {
             <div className="flex flex-row justify-center w-full ">
                 <div className='flex flex-row w-fit mx-auto gap-4'>
                     <input
-                        className="ml-auto rounded bg-secondary/20 py-1 px-2 text-left text-textColor h-10 w-24 placeholder:italic placeholder:text-slate-400 placeholder-shown:border-gray-500 border-gray-500 border-2"
+                        className="ml-auto rounded bg-secondary/20 py-1 px-2 text-left text-textColor h-10 w-24 placeholder:italic placeholder:text-secondary/50 placeholder-shown:border-secondary/50 border-secondary/50 border-2"
                         type="number"
                         value={quantity >= 1 ? String(quantity) : ""}
                         max="50"
@@ -268,7 +268,7 @@ export default function MintButton({ paused }: Props) {
                         type="button"
                         disabled={mintPending || approvePending || paused}
                         onClick={onSubmit}
-                        className={"rounded-md bg-secondary px-4 py-2 text-sm font-medium h-10 mr-auto" + getButtonStyle()}
+                        className={"w-24 rounded-md bg-secondary px-4 py-2 text-sm font-medium h-10 mr-auto" + getButtonStyle()}
                     >
                         MINT
                     </button>}
@@ -317,7 +317,7 @@ export default function MintButton({ paused }: Props) {
                                             {isMinting && mintPending && <div><p>Confirm transaction in your wallet.</p></div>}
                                             {isMinting && isConfirmingMint && <p>Minting your NFT(s)...</p>}
                                             {isMinting && isConfirmedMint && <div><p >Mint Successful!</p></div>}
-                                            {showError && <p className='text-primary'>{errorMessage}</p>}
+                                            {showError && <p className='text-secondary'>{errorMessage}</p>}
 
                                         </div>
                                         <div className='my-4 flex justify-center h-16'>

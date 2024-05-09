@@ -29,10 +29,10 @@ export default function Home() {
         <div>
 
         </div>
-        <div className="w-full gap-2 md:gap-12 2xl:gap-20 flex flex-row flex-wrap-reverse lg:flex-nowrap justify-between h-full ">
+        <div className="w-full gap-8 md:gap-12 2xl:gap-20 flex flex-row flex-wrap-reverse lg:flex-nowrap justify-between h-full ">
           <CollectionInfo></CollectionInfo>
           <MintInfo></MintInfo>
-          <div className="flex flex-col w-full justify-end order-first lg:order-none">
+          <div className="flex flex-col w-full justify-end order-first lg:order-none gap-4">
             <Nfts></Nfts>
             <AccountInfo></AccountInfo>
           </div>

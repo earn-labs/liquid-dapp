@@ -140,7 +140,7 @@ export default function Nfts() {
                                 src={nftsOwned[currentIdx].image}
                                 width={1024}
                                 height={1024}
-                                alt="Flameling Queens NFT"
+                                alt="Liquid NFT"
                                 priority
                             >
 

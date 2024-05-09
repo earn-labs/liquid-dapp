@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
 import { tokenABI } from "@/assets/tokenABI";
-import { formatEther, formatUnits } from "viem";
+import { formatUnits } from "viem";
 import { nftABI } from "@/assets/nftABI";
 import { ConnectKitButton } from "connectkit";
 import { config } from "@/lib/config";
@@ -24,7 +24,6 @@ export default function AccountInfo() {
     const tokenContract = {
         address: TOKEN_CONTRACT,
         abi: tokenABI,
-        chain: base.id,
         config
     };
 
@@ -62,7 +61,7 @@ export default function AccountInfo() {
     // set token balance
     useEffect(() => {
         function getTokenBalanceString(balance: number) {
-            console.log(balance)
+
             let text: string = "---";
             if (tokenLoading) {
                 text = "Loading...";

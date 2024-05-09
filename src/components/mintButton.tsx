@@ -3,9 +3,9 @@ import { config, isTestnet } from '@/lib/config';
 import { Dialog, Transition } from '@headlessui/react'
 import { MoonLoader } from 'react-spinners';
 import { Fragment, useEffect, useState } from 'react'
-import { formatEther } from 'viem';
+import { formatEther, formatUnits } from 'viem';
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { getBalance, getToken, readContract, switchChain } from 'wagmi/actions';
+import { getBalance, readContract, switchChain } from 'wagmi/actions';
 import Image from 'next/image';
 import { ConnectKitButton } from 'connectkit';
 import { nftABI } from '@/assets/nftABI';
@@ -18,7 +18,6 @@ const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
 const tokenContract = {
     address: TOKEN_CONTRACT,
     abi: tokenABI,
-    chain: base.id,
     config
 };
 
@@ -139,7 +138,7 @@ export default function MintButton({ paused }: Props) {
         const [sufficientBalance, approved, fee] = await hasTokensApproved(address, quantity);
 
         if (!sufficientBalance) {
-            setErrorMessage(`You have insufficient token balance. You need ${formatEther(fee)} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} to mint ${quantity} NFT.`);
+            setErrorMessage(`You have insufficient token balance. You need ${formatUnits(fee, 6)} ${process.env.NEXT_PUBLIC_TOKEN_SYMBOL} to mint ${quantity} NFT.`);
             setShowError(true);
             return;
         };
@@ -221,7 +220,7 @@ export default function MintButton({ paused }: Props) {
             });
 
             if (fee !== undefined) {
-                setTokenFee(Number(formatEther(fee)) * quantity);
+                setTokenFee(Number(formatUnits(fee, 6)) * quantity);
             }
         }
         if (quantity !== undefined) {

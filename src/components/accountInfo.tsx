@@ -116,7 +116,7 @@ export default function AccountInfo() {
                 ACCOUNT INFO
             </h2>
             <div className="mb-4 text-sm">
-                {isConnected && <ConnectKitButton showAvatar={false} showBalance={true} />}
+                <ConnectKitButton showAvatar={false} showBalance={true} />
             </div>
 
             <div className="flex justify-between text-secondary text-sm">

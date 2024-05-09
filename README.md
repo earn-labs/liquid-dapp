@@ -1,4 +1,4 @@
-# NFT-CONTRACT 🔥
+# LIQUID NFT-CONTRACT 🔥
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
 ![Forge](https://img.shields.io/badge/Forge-v0.2.0-blue?style=for-the-badge)
@@ -53,8 +53,11 @@ https://sepolia.basescan.org/address/0x9b5a03340a9778a02f24dfa7ea2f83a90379738d
 ### Smart Contracts Mainnet
 
 **Payment Token Contract**   
+https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
 
 **NFT Contract**  
+https://basescan.org/address/0x0528c4dfc247ea8b678d0ca325427c4ca639dec2
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -63,7 +66,7 @@ https://sepolia.basescan.org/address/0x9b5a03340a9778a02f24dfa7ea2f83a90379738d
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/trashpirate/nft-contract.git
+   git clone https://github.com/trashpirate/liquid-nft-contract.git
    ```
 2. Navigate to the project directory
    ```sh

@@ -15,12 +15,12 @@ contract HelperConfig is Script {
     string public constant BASE_URI =
         "ipfs://bafybeieybuwkv3kq4qgwpnpbm3lof6wgfn4xzuvwrmml4niotc6sjz6qh4/";
     string public constant CONTRACT_URI =
-        "ipfs://bafybeie2a65kn5rhd7dzt3wnqxwgjpwl2gsaeyzhozfsaxzlcgzq7vtpjq/contractMetadata";
+        "ipfs://bafybeigz3gtzldkj24u6kunv6o3rpbq4d3uzoqcdmbe5apoaxcoi6tjlwi/contractMetadata";
     uint256 public constant MAX_SUPPLY = 1000;
 
     uint256 public constant TOKEN_FEE = 500 ether;
     uint256 public constant ETH_FEE = 0;
-    uint96 public constant ROYALTY = 500;
+    uint96 public constant ROYALTY = 100;
 
     // chain configurations
     NetworkConfig public activeNetworkConfig;

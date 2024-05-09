@@ -71,7 +71,7 @@ export default function MintButton({ paused }: Props) {
     let [isApproving, setIsApproving] = useState<boolean>(false);
     let [isMinting, setIsMinting] = useState<boolean>(false);
     let [mintCompleted, setMintCompleted] = useState<boolean>(false);
-    let [quantity, setQuantity] = useState<number>(0);
+    let [quantity, setQuantity] = useState<number>(1);
     let [tokenFee, setTokenFee] = useState<number>(1);
     let [showError, setShowError] = useState<boolean>(false);
     let [errorMessage, setErrorMessage] = useState<string>("An Error occured.");

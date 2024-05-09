@@ -2,13 +2,11 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
-
 import { tokenABI } from "@/assets/tokenABI";
 import { formatEther } from "viem";
 import { nftABI } from "@/assets/nftABI";
-import { mainnet, sepolia } from "wagmi/chains";
 import { ConnectKitButton } from "connectkit";
-import { config, isTestnet } from "@/lib/config";
+import { config } from "@/lib/config";
 
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
 const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
@@ -25,7 +23,6 @@ export default function AccountInfo() {
     const tokenContract = {
         address: TOKEN_CONTRACT,
         abi: tokenABI,
-        chainId: isTestnet() ? sepolia.id : mainnet.id,
         config
     };
 
@@ -33,7 +30,6 @@ export default function AccountInfo() {
     const nftContract = {
         address: NFT_CONTRACT,
         abi: nftABI,
-        chainId: isTestnet() ? sepolia.id : mainnet.id,
         config
     };
 
@@ -133,7 +129,7 @@ export default function AccountInfo() {
     return (
         <div className="h-fit mx-auto w-full rounded-md my-2 text-titleColor max-w-md ">
 
-            <h2 className="mb-4 border-b-2 border-primary pb-2 text-lg uppercase">
+            <h2 className="mb-4 border-b-2 border-primary pb-2 text-lg uppercase  text-textColor">
                 ACCOUNT INFO
             </h2>
             <div className="mb-4 text-sm">

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "example.com",
-    creator: "@laylascreations",
+    creator: "@buyholdearn",
     images: "https://example.com/featured_image.jpg",
   },
   openGraph: {

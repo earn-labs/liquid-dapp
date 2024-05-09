@@ -1,7 +1,7 @@
 import { http, createConfig } from "@wagmi/core";
-import { mainnet, sepolia } from "@wagmi/core/chains";
 import { getDefaultConfig } from "connectkit";
 import { cookieStorage, createStorage } from "wagmi";
+import { base, baseSepolia } from "wagmi/chains";
 
 export function isTestnet() {
   return process.env.NEXT_PUBLIC_ENABLE_TESTNET == "true";
@@ -10,10 +10,10 @@ export function isTestnet() {
 export const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [isTestnet() ? mainnet : sepolia],
+    chains: [isTestnet() ? baseSepolia : base],
     transports: {
       // RPC URL for each chain
-      [isTestnet() ? mainnet.id : sepolia.id]: http(
+      [isTestnet() ? baseSepolia.id : base.id]: http(
         `${process.env.NEXT_PUBLIC_RPC_URL}`
       ),
     },
@@ -26,7 +26,7 @@ export const config = createConfig(
 
     // Optional App Info
     appDescription: process.env.NEXT_PUBLIC_PROJECT_DESCRIPTION,
-    appUrl: "https://example.com", // your app's url
-    appIcon: "https://example.com/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
+    appUrl: "https://liquid.buyholdearn.com", // your app's url
+    appIcon: "https://liquid.buyholdearn.com/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
   })
 );

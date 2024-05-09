@@ -24,7 +24,7 @@ const config: Config = {
       },
       colors: {
         bgColor: "#000000",
-        textColor: "#ffffff",
+        textColor: "#fff",
         primary: "#2F34EA",
         secondary: "#5CBCEF",
         button: "#fff",

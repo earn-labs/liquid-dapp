@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useReadContract } from "wagmi";
 import { nftABI } from "@/assets/nftABI";
 import { config, isTestnet } from "@/lib/config";
-import { sepolia, mainnet } from "wagmi/chains";
 import CopyToClipboard from "./copyToClipboard";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,7 +19,6 @@ export default function CollectionInfo() {
     const nftContract = {
         address: NFT_CONTRACT,
         abi: nftABI,
-        chainId: isTestnet() ? sepolia.id : mainnet.id,
         config
     };
 
@@ -84,7 +82,7 @@ export default function CollectionInfo() {
     return (
         <div className="h-fit mx-auto w-full rounded-md my-2 text-titleColor max-w-md flex flex-col justify-between">
             <div className="flex flex-row gap-5 align-middle justify-start">
-                <h2 className="mb-4 border-b-2 border-primary pb-2 text-lg uppercase">
+                <h2 className="mb-4 border-b-2 border-primary pb-2 text-lg uppercase text-textColor">
                     {COLLECTION_NAME}
                 </h2>
 
@@ -100,7 +98,7 @@ export default function CollectionInfo() {
                     textSize='text-base'
                     iconSize='text-[10px]'
                 />
-                <Link className="opacity-80 hover:opacity-100 my-auto w-fit" href={`https://${isTestnet() ? "sepolia." : ""}etherscan.io/token/${NFT_CONTRACT}`} target="_blank">
+                <Link className="opacity-80 hover:opacity-100 my-auto w-fit" href={`https://${isTestnet() ? "baseSepolia." : ""}etherscan.io/token/${NFT_CONTRACT}`} target="_blank">
                     <Image
                         src="/basescan.svg"
                         width={122}

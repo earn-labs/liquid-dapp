@@ -1,7 +1,6 @@
 import Image from "next/image";
 import MintButton from "./mintButton";
-import { mainnet, sepolia } from "wagmi/chains";
-import { config, isTestnet } from "@/lib/config";
+import { config } from "@/lib/config";
 import { useEffect, useState } from "react";
 import { readContract } from "@wagmi/core";
 import { useReadContract } from "wagmi";
@@ -13,7 +12,6 @@ const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
 const nftContract = {
     address: NFT_CONTRACT,
     abi: nftABI,
-    chainId: isTestnet() ? sepolia.id : mainnet.id,
     config
 };
 
@@ -21,34 +19,19 @@ type Props = {};
 
 export default function MintInfo({ }: Props) {
 
-    let [paused, setPaused] = useState<boolean>(true);
     let [soldOut, setSoldOut] = useState<boolean>(false);
 
     // check if paused
-    // const { data: paused } = useReadContract({
-    //     ...nftContract,
-    //     functionName: "isPaused",
-    // });
-    const { data: unpaused } = useReadContract({
+    const { data: paused } = useReadContract({
         ...nftContract,
-        functionName: "getBatchLimit",
+        functionName: "isPaused",
     });
-
-    useEffect(() => {
-        if (unpaused !== undefined) {
-            if (unpaused)
-                setPaused(false);
-            else
-                setPaused(true);
-        }
-
-    }, [unpaused])
-
 
 
     useEffect(() => {
 
         async function isSoldOut(): Promise<boolean | undefined> {
+
             const totalSupply = await readContract(config, {
                 ...nftContract,
                 functionName: "totalSupply",

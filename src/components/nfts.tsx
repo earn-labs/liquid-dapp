@@ -5,7 +5,6 @@ import { useAccount, useReadContract } from "wagmi";
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon, MusicalNoteIcon, VideoCameraIcon, LinkIcon } from "@heroicons/react/24/solid";
 import { nftABI } from "@/assets/nftABI";
-import { base, baseSepolia } from "viem/chains";
 import { config, isTestnet } from "@/lib/config";
 
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
@@ -47,7 +46,6 @@ export default function Nfts() {
     const nftContract = {
         address: NFT_CONTRACT,
         abi: nftABI,
-        chainId: isTestnet() ? baseSepolia.id : base.id,
         config
     };
 
@@ -67,7 +65,7 @@ export default function Nfts() {
         async function getNFTs() {
             let imageArray: NFTMeta[] = [];
             if (isConnected && nftBalance !== undefined) {
-                const nfts = await alchemy.nft.getNftsForOwner(address as `0x${string}`);
+                const nfts = await alchemy.nft.getNftsForOwner(address as `0x${string}`, { contractAddresses: [NFT_CONTRACT] });
                 let nftList = nfts.ownedNfts;
                 let totalNFTS = nfts.totalCount;
                 console.log(totalNFTS)

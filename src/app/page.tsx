@@ -33,13 +33,14 @@ export default function Home() {
           <div className="h-full flex flex-col w-full justify-end">
             <CollectionInfo></CollectionInfo>
           </div>
+          <div className="h-full flex flex-col w-full justify-end">
+            <MintInfo></MintInfo>
+          </div>
           <div className="h-full flex flex-col w-full justify-end order-first lg:order-none">
             <Nfts></Nfts>
             <AccountInfo></AccountInfo>
           </div>
-          <div className="h-full flex flex-col w-full justify-end">
-            <MintInfo></MintInfo>
-          </div>
+
         </div>
       </div>
       <Footer></Footer>

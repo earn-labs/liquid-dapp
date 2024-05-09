@@ -76,9 +76,9 @@ NEXT_PUBLIC_TOKEN_SYMBOL="BEP-20 Token Symbol"
 # chain configs
 NEXT_PUBLIC_ALCHEMY_API_KEY=<your API key> # https://www.alchemy.com/
 
-NEXT_PUBLIC_ENABLE_TESTNET=true # toggles to use testnet configuration or mainnet
+NEXT_PUBLIC_ENABLE_TESTNET=true # toggles to use testnet configuration or base
 
-# smart contract configs (toggle these to switch between testnet and mainnet)
+# smart contract configs (toggle these to switch between testnet and base)
 NEXT_PUBLIC_RPC_URL="RPC URL" # e.g. https://www.ankr.com/ or  https://www.alchemy.com/ (depends on chains and your preference)
 NEXT_PUBLIC_RPC_DESTINATION="RPC URL" # e.g. https://www.ankr.com/ or  https://www.alchemy.com/ (depends on chains and your preference)
 NEXT_PUBLIC_TOKEN_CONTRACT="Contract Address"

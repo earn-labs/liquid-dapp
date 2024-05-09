@@ -1,10 +1,24 @@
 export const nftABI = [
   {
     inputs: [
-      { internalType: "address", name: "initialOwner", type: "address" },
-      { internalType: "address", name: "initialFeeAddress", type: "address" },
-      { internalType: "address", name: "tokenAddress", type: "address" },
-      { internalType: "string", name: "baseURI", type: "string" },
+      {
+        components: [
+          { internalType: "string", name: "name", type: "string" },
+          { internalType: "string", name: "symbol", type: "string" },
+          { internalType: "address", name: "owner", type: "address" },
+          { internalType: "uint256", name: "tokenFee", type: "uint256" },
+          { internalType: "uint256", name: "ethFee", type: "uint256" },
+          { internalType: "address", name: "feeAddress", type: "address" },
+          { internalType: "address", name: "tokenAddress", type: "address" },
+          { internalType: "string", name: "baseURI", type: "string" },
+          { internalType: "string", name: "contractURI", type: "string" },
+          { internalType: "uint256", name: "maxSupply", type: "uint256" },
+          { internalType: "uint96", name: "royaltyNumerator", type: "uint96" },
+        ],
+        internalType: "struct NFTContract.ConstructorArguments",
+        name: "args",
+        type: "tuple",
+      },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -13,47 +27,64 @@ export const nftABI = [
   { inputs: [], name: "ApprovalQueryForNonexistentToken", type: "error" },
   { inputs: [], name: "BalanceQueryForZeroAddress", type: "error" },
   {
-    inputs: [],
-    name: "FlameStarters_BatchLimitExceedsMaxPerWallet",
+    inputs: [
+      { internalType: "uint256", name: "numerator", type: "uint256" },
+      { internalType: "uint256", name: "denominator", type: "uint256" },
+    ],
+    name: "ERC2981InvalidDefaultRoyalty",
     type: "error",
   },
-  { inputs: [], name: "FlameStarters_BatchLimitTooHigh", type: "error" },
-  { inputs: [], name: "FlameStarters_EthTransferFailed", type: "error" },
-  { inputs: [], name: "FlameStarters_ExceedsBatchLimit", type: "error" },
-  { inputs: [], name: "FlameStarters_ExceedsMaxPerWallet", type: "error" },
-  { inputs: [], name: "FlameStarters_ExceedsMaxSupply", type: "error" },
-  { inputs: [], name: "FlameStarters_FeeAddressIsZeroAddress", type: "error" },
+  {
+    inputs: [{ internalType: "address", name: "receiver", type: "address" }],
+    name: "ERC2981InvalidDefaultRoyaltyReceiver",
+    type: "error",
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "tokenId", type: "uint256" },
+      { internalType: "uint256", name: "numerator", type: "uint256" },
+      { internalType: "uint256", name: "denominator", type: "uint256" },
+    ],
+    name: "ERC2981InvalidTokenRoyalty",
+    type: "error",
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "tokenId", type: "uint256" },
+      { internalType: "address", name: "receiver", type: "address" },
+    ],
+    name: "ERC2981InvalidTokenRoyaltyReceiver",
+    type: "error",
+  },
+  { inputs: [], name: "MintERC2309QuantityExceedsLimit", type: "error" },
+  { inputs: [], name: "MintToZeroAddress", type: "error" },
+  { inputs: [], name: "MintZeroQuantity", type: "error" },
+  { inputs: [], name: "NFTContract_BatchLimitTooHigh", type: "error" },
+  { inputs: [], name: "NFTContract_ContractIsPaused", type: "error" },
+  { inputs: [], name: "NFTContract_EthTransferFailed", type: "error" },
+  { inputs: [], name: "NFTContract_ExceedsBatchLimit", type: "error" },
+  { inputs: [], name: "NFTContract_ExceedsMaxPerWallet", type: "error" },
+  { inputs: [], name: "NFTContract_ExceedsMaxSupply", type: "error" },
+  { inputs: [], name: "NFTContract_FeeAddressIsZeroAddress", type: "error" },
   {
     inputs: [
       { internalType: "uint256", name: "value", type: "uint256" },
       { internalType: "uint256", name: "fee", type: "uint256" },
     ],
-    name: "FlameStarters_InsufficientEthFee",
+    name: "NFTContract_InsufficientEthFee",
     type: "error",
   },
-  { inputs: [], name: "FlameStarters_InsufficientMintQuantity", type: "error" },
-  { inputs: [], name: "FlameStarters_InsufficientTokenBalance", type: "error" },
-  {
-    inputs: [],
-    name: "FlameStarters_MaxPerWalletExceedsMaxSupply",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FlameStarters_MaxPerWalletSmallerThanBatchLimit",
-    type: "error",
-  },
-  { inputs: [], name: "FlameStarters_NoBaseURI", type: "error" },
+  { inputs: [], name: "NFTContract_InsufficientMintQuantity", type: "error" },
+  { inputs: [], name: "NFTContract_InsufficientTokenBalance", type: "error" },
+  { inputs: [], name: "NFTContract_NoBaseURI", type: "error" },
   {
     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    name: "FlameStarters_NonexistentToken",
+    name: "NFTContract_NonexistentToken",
     type: "error",
   },
-  { inputs: [], name: "FlameStarters_TokenTransferFailed", type: "error" },
-  { inputs: [], name: "FlameStarters_TokenUriError", type: "error" },
-  { inputs: [], name: "MintERC2309QuantityExceedsLimit", type: "error" },
-  { inputs: [], name: "MintToZeroAddress", type: "error" },
-  { inputs: [], name: "MintZeroQuantity", type: "error" },
+  { inputs: [], name: "NFTContract_TokenTransferFailed", type: "error" },
+  { inputs: [], name: "NFTContract_TokenUriError", type: "error" },
+  { inputs: [], name: "NotCompatibleWithSpotMints", type: "error" },
   {
     inputs: [{ internalType: "address", name: "owner", type: "address" }],
     name: "OwnableInvalidOwner",
@@ -66,6 +97,10 @@ export const nftABI = [
   },
   { inputs: [], name: "OwnerQueryForNonexistentToken", type: "error" },
   { inputs: [], name: "OwnershipNotInitializedForExtraData", type: "error" },
+  { inputs: [], name: "SequentialMintExceedsLimit", type: "error" },
+  { inputs: [], name: "SequentialUpToTooSmall", type: "error" },
+  { inputs: [], name: "SpotMintTokenIdTooSmall", type: "error" },
+  { inputs: [], name: "TokenAlreadyExists", type: "error" },
   { inputs: [], name: "TransferCallerNotOwnerNorApproved", type: "error" },
   { inputs: [], name: "TransferFromIncorrectOwner", type: "error" },
   { inputs: [], name: "TransferToNonERC721ReceiverImplementer", type: "error" },
@@ -121,6 +156,38 @@ export const nftABI = [
     inputs: [
       {
         indexed: true,
+        internalType: "string",
+        name: "baseUri",
+        type: "string",
+      },
+    ],
+    name: "BaseURIUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "batchLimit",
+        type: "uint256",
+      },
+    ],
+    name: "BatchLimitSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: "uint256",
         name: "fromTokenId",
         type: "uint256",
@@ -135,6 +202,52 @@ export const nftABI = [
       { indexed: true, internalType: "address", name: "to", type: "address" },
     ],
     name: "ConsecutiveTransfer",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "string",
+        name: "contractUri",
+        type: "string",
+      },
+    ],
+    name: "ContractURIUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      { indexed: false, internalType: "uint256", name: "fee", type: "uint256" },
+    ],
+    name: "EthFeeSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "feeAddress",
+        type: "address",
+      },
+    ],
+    name: "FeeAddressSet",
     type: "event",
   },
   {
@@ -165,14 +278,28 @@ export const nftABI = [
         name: "sender",
         type: "address",
       },
+      { indexed: false, internalType: "bool", name: "isPaused", type: "bool" },
+    ],
+    name: "Paused",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "batchLimit",
-        type: "uint256",
+        indexed: true,
+        internalType: "address",
+        name: "feeAddress",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint96",
+        name: "royaltyNumerator",
+        type: "uint96",
       },
     ],
-    name: "SetBatchLimit",
+    name: "RoyaltyUpdated",
     type: "event",
   },
   {
@@ -186,40 +313,7 @@ export const nftABI = [
       },
       { indexed: false, internalType: "uint256", name: "fee", type: "uint256" },
     ],
-    name: "SetEthFee",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "maxPerWallet",
-        type: "uint256",
-      },
-    ],
-    name: "SetMaxPerWallet",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-      { indexed: false, internalType: "uint256", name: "fee", type: "uint256" },
-    ],
-    name: "SetTokenFee",
+    name: "TokenFeeSet",
     type: "event",
   },
   {
@@ -262,6 +356,13 @@ export const nftABI = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "contractURI",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
     name: "getApproved",
     outputs: [{ internalType: "address", name: "", type: "address" }],
@@ -270,7 +371,7 @@ export const nftABI = [
   },
   {
     inputs: [],
-    name: "getBaseUri",
+    name: "getBaseURI",
     outputs: [{ internalType: "string", name: "", type: "string" }],
     stateMutability: "view",
     type: "function",
@@ -298,16 +399,9 @@ export const nftABI = [
   },
   {
     inputs: [],
-    name: "getMaxPerWallet",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "getMaxSupply",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "pure",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -330,6 +424,13 @@ export const nftABI = [
       { internalType: "address", name: "operator", type: "address" },
     ],
     name: "isApprovedForAll",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "isPaused",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
@@ -363,10 +464,30 @@ export const nftABI = [
     type: "function",
   },
   {
+    inputs: [{ internalType: "bool", name: "_isPaused", type: "bool" }],
+    name: "pause",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "tokenId", type: "uint256" },
+      { internalType: "uint256", name: "salePrice", type: "uint256" },
+    ],
+    name: "royaltyInfo",
+    outputs: [
+      { internalType: "address", name: "", type: "address" },
+      { internalType: "uint256", name: "", type: "uint256" },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -403,6 +524,13 @@ export const nftABI = [
     type: "function",
   },
   {
+    inputs: [{ internalType: "string", name: "baseURI", type: "string" }],
+    name: "setBaseURI",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "uint256", name: "batchLimit", type: "uint256" }],
     name: "setBatchLimit",
     outputs: [],
@@ -425,9 +553,10 @@ export const nftABI = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "maxPerWallet", type: "uint256" },
+      { internalType: "address", name: "feeAddress", type: "address" },
+      { internalType: "uint96", name: "royaltyNumerator", type: "uint96" },
     ],
-    name: "setMaxPerWallet",
+    name: "setRoyalty",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -463,7 +592,7 @@ export const nftABI = [
   {
     inputs: [],
     name: "totalSupply",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [{ internalType: "uint256", name: "result", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },

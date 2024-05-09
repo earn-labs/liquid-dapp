@@ -6,7 +6,6 @@ import { Fragment, useEffect, useState } from 'react'
 import { formatEther } from 'viem';
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { getBalance, readContract, switchChain } from 'wagmi/actions';
-import { mainnet, sepolia } from 'wagmi/chains';
 import Image from 'next/image';
 import { ConnectKitButton } from 'connectkit';
 import { nftABI } from '@/assets/nftABI';
@@ -18,7 +17,6 @@ const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
 const tokenContract = {
     address: TOKEN_CONTRACT,
     abi: tokenABI,
-    chainId: isTestnet() ? sepolia.id : mainnet.id,
     config
 };
 
@@ -26,7 +24,6 @@ const tokenContract = {
 const nftContract = {
     address: NFT_CONTRACT,
     abi: nftABI,
-    chainId: isTestnet() ? sepolia.id : mainnet.id,
     config
 };
 
@@ -132,21 +129,21 @@ export default function MintButton({ paused }: Props) {
     // on button click
     async function onSubmit() {
 
-        if (chainId != (isTestnet() ? sepolia.id : mainnet.id)) {
-            setErrorMessage("The NFTs are minted on Ethereum. Switch to Ethereum and try again.");
-            setShowError(true);
-            try {
-                if (isTestnet())
-                    await switchChain(config, { chainId: sepolia.id });
-                else
-                    await switchChain(config, { chainId: mainnet.id });
-            }
-            catch {
-                console.log('Switching chains failed.')
-                setShowError(false);
-            }
-            return;
-        }
+        // if (chainId != (isTestnet() ? baseSepolia.id : base.id)) {
+        //     setErrorMessage("The NFTs are minted on Ethereum. Switch to Ethereum and try again.");
+        //     setShowError(true);
+        //     try {
+        //         if (isTestnet())
+        //             await switchChain(config, { chainId: baseSepolia.id });
+        //         else
+        //             await switchChain(config, { chainId: base.id });
+        //     }
+        //     catch {
+        //         console.log('Switching chains failed.')
+        //         setShowError(false);
+        //     }
+        //     return;
+        // }
 
         const [sufficientBalance, approved, tokenFee] = await hasTokensApproved(address);
 

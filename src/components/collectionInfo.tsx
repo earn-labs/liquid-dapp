@@ -147,8 +147,7 @@ export default function CollectionInfo() {
                 <div className="grid grid-cols-2 justify-between w-full text-secondary my-4">
                     <h3 className="uppercase">Minting Fee: </h3>
                     <div>
-                        <p className="text-right">0.2 BNB</p>
-                        <p className="text-right">1M $0X52</p>
+                        <p className="text-right">500 USDC</p>
                     </div>
 
                 </div>

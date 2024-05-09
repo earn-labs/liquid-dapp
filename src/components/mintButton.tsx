@@ -9,6 +9,7 @@ import { getBalance, getToken, readContract, switchChain } from 'wagmi/actions';
 import Image from 'next/image';
 import { ConnectKitButton } from 'connectkit';
 import { nftABI } from '@/assets/nftABI';
+import { base } from 'viem/chains';
 
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
 const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
@@ -17,6 +18,7 @@ const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
 const tokenContract = {
     address: TOKEN_CONTRACT,
     abi: tokenABI,
+    chain: base.id,
     config
 };
 

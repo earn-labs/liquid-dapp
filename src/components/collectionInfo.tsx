@@ -6,14 +6,37 @@ import { config, isTestnet } from "@/lib/config";
 import CopyToClipboard from "./copyToClipboard";
 import Link from "next/link";
 import Image from "next/image";
+import { CheckIcon, ClipboardDocumentIcon } from "@heroicons/react/24/solid";
 
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
+const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
 const COLLECTION_NAME = process.env.NEXT_PUBLIC_PROJECT_NAME;
 
 
 export default function CollectionInfo() {
     const [totalSupplyString, setTotalSupplyString] = useState<string | null>(null);
     const [nftsRemainingString, setNftsRemainingString] = useState<string | null>(null);
+    const [copied, setCopied] = useState<boolean>(false);
+
+    useEffect(() => {
+        // Use setTimeout to update the message after 2000 milliseconds (2 seconds)
+        const timeoutId = setTimeout(() => {
+            setCopied(false);
+        }, 2000);
+
+        // Cleanup function to clear the timeout if the component unmounts
+        return () => clearTimeout(timeoutId);
+    }, [copied]); // Empty dependency array ensures the effect runs only once
+
+    const copylink = async (e: any) => {
+        try {
+            navigator.clipboard.writeText(`${TOKEN_CONTRACT}`);
+            setCopied(true);
+            console.log("copied: " + `${TOKEN_CONTRACT}`);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     // define nft contract config
     const nftContract = {
@@ -112,8 +135,20 @@ export default function CollectionInfo() {
             <div className=" text-base">
                 <div className="grid grid-cols-2 justify-between w-full text-secondary my-4">
                     <h3 className="uppercase">Minting Fee: </h3>
-                    <div>
+                    <div className="flex flex-row justify-end gap-2">
                         <p className="text-right">500 USDC</p>
+                        <div onClick={copylink} className="cursor-pointer text-[10px] w-4 my-auto opacity-60 hover:opacity-100">
+                            {copied ? <CheckIcon /> : <ClipboardDocumentIcon />}
+                        </div>
+                        <Link className="opacity-80 hover:opacity-100 my-auto w-fit" href={`https://${isTestnet() ? "sepolia." : ""}basescan.org/address/${TOKEN_CONTRACT}`} target="_blank">
+                            <Image
+                                src="/basescan.svg"
+                                width={122}
+                                height={122}
+                                style={{ width: "15px", height: "auto" }}
+                                alt="etherscan"
+                            />
+                        </Link>
                     </div>
 
                 </div>

@@ -1,4 +1,4 @@
-# MINTING DAPP
+# LIQUID DAPP
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
 ![Node](https://img.shields.io/badge/node-v12.22.9-blue.svg?style=for-the-badge)
@@ -39,10 +39,19 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This repository contains the code for a minting dApp for a NFT collection
+![FlamelingQueens](https://github.com/trashpirate/liquid-dapp/blob/master/public/title.png?raw=true)
+
+This repository contains the code of a minting dapp developed for the NFT collection [Liquid](https://opensea.io/collection/liquid-base).
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+### Contracts on BASE MAINNET
+
+**Token Contract (USDC)**  
+https://basescan.org/token/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+
+**NFT Contract**  
+https://basescan.org/address/0x0528C4DFc247eA8b678D0CA325427C4ca639DEC2
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -51,11 +60,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/trashpirate/minting-dapp.git
+   git clone https://github.com/trashpirate/liquid-dapp.git
    ```
 2. Navigate to the project directory
    ```sh
-   cd minting-dapp
+   cd liquid-dapp
    ```
 3. Install NPM packages
    ```sh
@@ -64,9 +73,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Usage
 
-Before running any commands, create a .env file and add the following environment variables. These are configured for BNB and BASE chain:
-```bash
+Before running any commands, create a .env file and add the following environment variables. These are configured for BASE chain:
 
+```bash
 # dapp configs
 NEXT_PUBLIC_PROJECT_NAME="Title"
 NEXT_PUBLIC_PROJECT_ID="Project Id from WalletConnect" # https://cloud.walletconnect.com/app
@@ -80,11 +89,10 @@ NEXT_PUBLIC_ENABLE_TESTNET=true # toggles to use testnet configuration or base
 
 # smart contract configs (toggle these to switch between testnet and base)
 NEXT_PUBLIC_RPC_URL="RPC URL" # e.g. https://www.ankr.com/ or  https://www.alchemy.com/ (depends on chains and your preference)
-NEXT_PUBLIC_RPC_DESTINATION="RPC URL" # e.g. https://www.ankr.com/ or  https://www.alchemy.com/ (depends on chains and your preference)
 NEXT_PUBLIC_TOKEN_CONTRACT="Contract Address"
 NEXT_PUBLIC_NFT_CONTRACT="Contract Address"
-NEXT_PUBLIC_NFT_CONTRACT="Contract Address"
-NEXT_PUBLIC_DESTINATION_MINTER_CONTRACT="Contract Address"
+```
+
 
 #### Run development server:
 
@@ -130,9 +138,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Nadina Oates - [@N0_crypto](https://twitter.com/N0_crypto)
 
-Main Repository: [https://github.com/trashpirate/queens](https://github.com/trashpirate/queens)
+Main Repository: [https://github.com/trashpirate/liquid-nfts](https://github.com/trashpirate/liquid-nfts)
 
-Project Link: [https://0x52.buyholdearn.com/](https://0x52.buyholdearn.com/)
+Project Link: [https://liquid.buyholdearn.com/](https://liquid.buyholdearn.com/)
 
 
 <!-- ACKNOWLEDGMENTS -->

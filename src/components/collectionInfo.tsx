@@ -130,7 +130,7 @@ export default function CollectionInfo() {
                 </Link>
             </div>
             <div className="min-h-24 w-full text-secondary my-4">
-                <div>Liquid NFTs contribute to EARN liquidity and provide revenue share from the EARN ecosystem to holders.</div>
+                <div>Liquid NFTs contribute to EARN liquidity and provide fee share from the EARN ecosystem to holders.</div>
             </div>
             <div className=" text-base">
                 <div className="grid grid-cols-2 justify-between w-full text-secondary my-4">

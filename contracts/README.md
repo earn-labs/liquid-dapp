@@ -1,4 +1,4 @@
-# LIQUID NFT-CONTRACT 🔥
+# LIQUID DAPP SMART CONTRACT 🔥
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
 ![Forge](https://img.shields.io/badge/Forge-v0.2.0-blue?style=for-the-badge)

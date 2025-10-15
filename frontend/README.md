@@ -7,39 +7,12 @@
 ![Tailwindcss](https://img.shields.io/badge/TailwindCSS-v3.4.1-blue?style=for-the-badge)
 ![Wagmi](https://img.shields.io/badge/Wagmi-v2.8.0-blue?style=for-the-badge)
 ![Viem](https://img.shields.io/badge/Viem-v2.9.31-blue?style=for-the-badge)
-[![License: MIT](https://img.shields.io/github/license/trashpirate/hold-earn.svg?style=for-the-badge)](https://github.com/trashpirate/hold-earn/blob/main/LICENSE)
-
-[![Website: nadinaoates.com](https://img.shields.io/badge/Portfolio-00e0a7?style=for-the-badge&logo=Website)](https://nadinaoates.com)
-[![LinkedIn: nadinaoates](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=LinkedIn&logoColor=f5f5f5)](https://linkedin.com/in/nadinaoates)
-[![Twitter: N0\_crypto](https://img.shields.io/badge/@N0\_crypto-black?style=for-the-badge&logo=X)](https://twitter.com/N0\_crypto)
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
-      </ul>
-    </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
-  </ol>
-</details>
-
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![FlamelingQueens](https://github.com/trashpirate/liquid-dapp/blob/master/public/title.png?raw=true)
+![LiquidDapp](https://github.com/earn-labs/liquid-dapp/blob/master/frontend/public/title.png?raw=true)
 
 This repository contains the code of a minting dapp developed for the NFT collection [Liquid](https://opensea.io/collection/liquid-base).
 
@@ -60,11 +33,11 @@ https://basescan.org/address/0x0528C4DFc247eA8b678D0CA325427C4ca639DEC2
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/trashpirate/liquid-dapp.git
+   git clone https://github.com/earn-labs/liquid-dapp.git
    ```
 2. Navigate to the project directory
    ```sh
-   cd liquid-dapp
+   cd liquid-dapp/frontend
    ```
 3. Install NPM packages
    ```sh
@@ -133,16 +106,4 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-<!-- CONTACT -->
-## Contact
-
-Nadina Oates - [@N0_crypto](https://twitter.com/N0_crypto)
-
-Main Repository: [https://github.com/trashpirate/liquid-nfts](https://github.com/trashpirate/liquid-nfts)
-
-Project Link: [https://liquid.buyholdearn.com/](https://liquid.buyholdearn.com/)
-
-
-<!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments -->
 

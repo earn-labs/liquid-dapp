@@ -22,7 +22,7 @@ This repository contains the code for the NFT collection [Liquid](https://opense
 [Frontend](./frontend): Code for the mintig dApp using Nextjs and Wagmi (deployed on Vercel)
 
 ## Installation & Usage
-Refer to the documentation in the specific submodules.
+Refer to the documentation in the specific directories.
 
 <!-- CONTRIBUTING -->
 ## Contributing
